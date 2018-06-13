@@ -7,7 +7,7 @@ import MovementClass as Movement
 import bluetooth
 import ast
 
-hostMACAddress = '00:17:E9:F8:72:06' # The MAC address of a Bluetooth adapter on the server. The server might have multiple Bluetooth adapters.
+hostMACAddress = 'A0:E6:F8:16:31:59' # The MAC address of a Bluetooth adapter on the server. The server might have multiple Bluetooth adapters.
 port = 3
 backlog = 1
 size = 1024
@@ -48,6 +48,7 @@ class Robot():
 
 
     def processRoute(self):
+        print('path')
         print(self.path)
         if self.path[0] == "left":
             self.turnLeft(78)
@@ -176,6 +177,7 @@ if __name__ == "__main__":
                     commands = ast.literal_eval(data.decode("ascii"))
                     #format of data: a:b
                     robot.reset()
+                    print('command')
                     print(commands)
                     if (robot.receiveCommand(commands)):
                         robot.start()

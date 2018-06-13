@@ -31,6 +31,7 @@ app.get('/data', function (req, res) {
 });
 
 io.on('connection', function(socket){
+    console.log('d')
   socket.on('channel', function(msg){
     io.emit('channel', msg);
     console.log('server', msg);
