@@ -2,8 +2,10 @@ import sys
 # addr ev3dev
 # name 00:17:E9:F8:72:06
 import bluetooth
+import requests
 
 serverMACAddress = 'A0:E6:F8:16:31:59'
+url = 'http://localhost:3000'
 port = 3
 s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 s.connect((serverMACAddress, port))
@@ -113,12 +115,21 @@ def apply():
         while not done:
             print("Waiting robot response!")
             data = s.recv(2048)
+            response = {
+                "status": 0,
+                "action": ''
+            }
+            print(response)
             if "done" in data.decode('ascii'):
                 done = True
+                response['status'] = 'Job done'
                 print("Job Done")
             elif "refuse" in data.decode('ascii'):
                 done = True
+                response['status'] = 'Job refused'
                 print("Job Refused")
+
+            r = requests.get(url=url + '/data', params=response)
             reset()
     else:
         print("Define command first")

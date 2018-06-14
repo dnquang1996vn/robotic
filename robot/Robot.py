@@ -48,7 +48,6 @@ class Robot():
 
 
     def processRoute(self):
-        print('path')
         print(self.path)
         if self.path[0] == "left":
             self.turnLeft(78)
@@ -177,7 +176,6 @@ if __name__ == "__main__":
                     commands = ast.literal_eval(data.decode("ascii"))
                     #format of data: a:b
                     robot.reset()
-                    print('command')
                     print(commands)
                     if (robot.receiveCommand(commands)):
                         robot.start()
