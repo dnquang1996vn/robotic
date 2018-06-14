@@ -30,12 +30,13 @@ def get_request(args):
     print(args)
     global command
     if (args == 1):
-        print(132)
-        command = [{'C': 'Pick Up'}, {'A': 'Put Down'}]
-        apply()
-    else:
         command = [{'A': 'Pick Up'}, {'C': 'Put Down'}]
         apply()
+        reset()
+    else:
+        command = [{'C': 'Pick Up'}, {'A': 'Put Down'}]
+        apply()
+        reset()
 def reset():
     global command
     global currentPos
@@ -60,6 +61,10 @@ def apply():
             elif "refuse" in data.decode('ascii'):
                 done = True
                 print("Job Refused")
+            else:
+                respond = {'data': data.decode('ascii')}
+                r = requests.get(url=url + '/data', params=respond)
+
             reset()
     else:
         print("Define command first")

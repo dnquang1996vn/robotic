@@ -1,8 +1,22 @@
 import requests
+import threading
+import time
+import asyncio
 
-url = 'http://192.168.67.193:3000'
-url = 'https://fa93d370.ngrok.io'
-data = {"data": "24.3d"}
+url = 'https://5407ef99.ngrok.io'
+async def loop1_10():
+    send_request('e')
+    for i in range(1, 11):
+        time.sleep(1)
+        print(i)
 
-r = requests.get(url=url + '/data', params=data)
-print(r.text)
+
+def send_request(param):
+    respond = {'data': param}
+    r = requests.get(url=url + '/data', params=respond)
+    print(r.text)
+
+
+awloop1_10()
+
+

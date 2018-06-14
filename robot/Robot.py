@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from time import sleep
+import threading
 import ev3dev.ev3 as ev3
 import RoutingClass as Route
 import ArmClass as Arm
@@ -7,6 +8,8 @@ import MovementClass as Movement
 import bluetooth
 import ast
 
+
+url = 'https://5407ef99.ngrok.io'
 hostMACAddress = 'A0:E6:F8:16:31:59' # The MAC address of a Bluetooth adapter on the server. The server might have multiple Bluetooth adapters.
 port = 3
 backlog = 1
@@ -37,12 +40,16 @@ class Robot():
                 self.mc.turnRight()
             self.mc.setSpeed(300)
             if (self.cs.value() == 5):
+                print('red')
+                threading.Thread(target=self.send_request('red')).start()
                 self.mc.stop()
                 self.processAction()
                 if (len(self.path) == 0 and len(self.action) == 0):
                     stop = True
 
             if (self.cs.value() == 3):
+                print('green')
+                threading.Thread(target=self.send_request('green')).start()
                 self.mc.setSpeed(300)
                 self.processRoute()
 
@@ -144,6 +151,10 @@ class Robot():
     def start(self):
         self.lineFollowing()
 
+    def send_request(self, param):
+        respond = {'data': param}
+        client.send(param)
+
 if __name__ == "__main__":
 
     done = False
@@ -164,6 +175,7 @@ if __name__ == "__main__":
     gs.mode = "GYRO-ANG"
 
     robot = Robot("Start", [], [], gs, cs, mc, ac, rc)
+
 
     while not done:
         try:
