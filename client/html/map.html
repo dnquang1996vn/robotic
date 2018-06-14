@@ -18,12 +18,11 @@
 </nav>
 
 <div class="container text-center">
-    <h1>Virsualized Motion</h1>
-    <div class="row">
+    <div class="row" style="margin-top: 40px">
         <div class="col-3">
             <h1>Controlller</h1>
             <div class="card-body mt-3">
-                <div style="border: black">
+                <div id="robot_control" style="border: black">
                     <lable>Chose location:</lable>
                     <br>
                     <input type="radio" name="location_input" value=1 checked>A to C<br>
@@ -32,8 +31,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <canvas class="p-3" id="canvas" width="500" height="500" style="border: 1px solid"></canvas>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center">
+            <h1>Virsualized Motion</h1>
+            <img  id="map_image" src="../board_1.png" width="100%" height="100%">
+            <!--<canvas id="canvas" width="500" height="500"></canvas>-->
         </div>
         <div class="col-3">
             <h1>Statistic</h1>
@@ -41,12 +42,8 @@
                 <table class="table text-center list-group-item-primary">
                     <thead>
                     <tr>
-                        <th scope="col">Location:</th>
-                        <th scope="col"><span id="location_display"></span></th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Direction:</th>
-                        <th scope="col"><span id="direction_display"></span></th>
+                        <th scope="col">Status:</th>
+                        <th scope="col"><span id="status_display">Not run</span></th>
                     </tr>
                     <tr>
                         <th scope="col">Temperature:</th>
@@ -74,6 +71,5 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/server.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>

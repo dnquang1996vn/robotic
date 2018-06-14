@@ -3,7 +3,7 @@ var robot = new Image();
 var i = 0;
 
 function init() {
-    board.src = 'board.png';
+    board.src = 'board_1.png';
     robot.src = 'robot.png';
     window.requestAnimationFrame(draw);
 }
@@ -21,7 +21,7 @@ function draw() {
     ctx.translate(0, 0);
 
     // robot
-    ctx.translate(i, 50);
+    ctx.translate(i, 200);
     ctx.drawImage(robot, 0, 0);
 
     ctx.restore();
