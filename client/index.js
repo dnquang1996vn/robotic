@@ -30,14 +30,25 @@ app.get('/data', function (req, res) {
     res.send(msg)
 });
 
+app.get('/request', function (req, res) {
+    console.log(req.query);
+    msg = req.query
+    io.emit('request', msg);
+    res.send(msg)
+});
+
 io.on('connection', function(socket){
-    console.log('d')
-  socket.on('channel', function(msg){
-    io.emit('channel', msg);
-    console.log('server', msg);
-  });
+    socket.on('channel', function(msg){
+        io.emit('channel', msg);
+        console.log('channel: ', msg)
+    });
+
+    socket.on('request', function(msg){
+        io.emit('request', msg);
+        console.log('request: ', msg)
+    });
 });
 
 http.listen(port, function(){
-  console.log('listening on *:' + port);
+    console.log('listening on *:' + port);
 });
